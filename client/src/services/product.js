@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3010'
+  baseURL: '/api'
 });
 
 const list = () =>
   new Promise((resolve, reject) => {
     instance
-      .get('/products')
+      .get('/product/list')
       .then(result => {
-        const products = result.data;
+        const products = result.data.products;
         resolve(products);
       })
       .catch(reject);
@@ -21,9 +21,9 @@ const list = () =>
 const load = id =>
   new Promise((resolve, reject) => {
     instance
-      .get(`/products/${id}`)
+      .get(`/product/${id}`)
       .then(result => {
-        const product = result.data;
+        const product = result.data.product;
         resolve(product);
       })
       .catch(reject);
