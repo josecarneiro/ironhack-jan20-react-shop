@@ -1,0 +1,17 @@
+.product__single {
+  display: flex;
+  & > figure,
+  & > div {
+    flex: 1 1 50%;
+  }
+  .product__image {
+    margin-right: 1em;
+  }
+  .product__single__description {
+    display: flex;
+    flex-direction: column;
+  }
+  button {
+    justify-content: center;
+  }
+}

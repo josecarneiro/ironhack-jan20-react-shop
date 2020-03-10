@@ -1,0 +1,23 @@
+.product__item {
+  display: flex;
+  flex-direction: column;
+  // padding: 1em;
+}
+
+.product__image {
+  margin-bottom: 1em;
+  background: #f7f7f7;
+  img {
+    mix-blend-mode: multiply;
+  }
+}
+
+.product__information {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product__details {
+  display: flex;
+  flex-direction: column;
+}

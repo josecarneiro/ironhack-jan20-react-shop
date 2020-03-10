@@ -1,0 +1,14 @@
+.product__list {
+  @media (min-width: 30em) {
+    display: flex;
+    flex-wrap: wrap;
+    .product__item {
+      flex: 0 1 calc(100% / 3 - 1em * 2 / 3);
+      margin-right: 1em;
+      margin-bottom: 1em;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+  }
+}
