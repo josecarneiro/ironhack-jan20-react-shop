@@ -6,14 +6,16 @@ const createError = require('http-errors');
 const logger = require('morgan');
 
 const productRouter = require('./routes/product');
+const purchaseRouter = require('./routes/purchase');
 
 const app = express();
 
 app.use(express.static(join(__dirname, 'public')));
 app.use(logger('dev'));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use('/api/product', productRouter);
+app.use('/api/purchase', purchaseRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

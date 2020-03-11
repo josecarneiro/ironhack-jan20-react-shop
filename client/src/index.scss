@@ -34,11 +34,18 @@ a {
   text-decoration: none;
 }
 
+input,
+textarea,
 button {
   display: flex;
   padding: 1em;
-  background-color: hsla(230, 20%, 95%, 1);
+  margin-bottom: 1em;
   border: 0;
   font: inherit;
   color: inherit;
+  border: 1px solid hsla(230, 20%, 90%, 1);
+}
+
+button {
+  background-color: hsla(230, 20%, 95%, 1);
 }
