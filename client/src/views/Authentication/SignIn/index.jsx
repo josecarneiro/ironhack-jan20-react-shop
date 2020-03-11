@@ -12,20 +12,30 @@ class AuthenticationSignInView extends Component {
     this.handleFormSubmission = this.handleFormSubmission.bind(this);
   }
 
-  handleFormSubmission(event) {
+  async handleFormSubmission(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    signIn({
-      email,
-      password
-    })
-      .then(user => {
-        this.props.updateUserInformation(user);
-        this.props.history.push('/');
-      })
-      .catch(error => {
-        console.log(error);
+    try {
+      const user = await signIn({
+        email,
+        password
       });
+      this.props.updateUserInformation(user);
+      this.props.history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+    // signIn({
+    //   email,
+    //   password
+    // })
+    //   .then(user => {
+    //     this.props.updateUserInformation(user);
+    //     this.props.history.push('/');
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   }
 
   handleInputChange(event) {
