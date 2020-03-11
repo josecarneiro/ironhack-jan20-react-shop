@@ -34,11 +34,31 @@ a {
   text-decoration: none;
 }
 
+input,
+textarea,
 button {
   display: flex;
   padding: 1em;
-  background-color: hsla(230, 20%, 95%, 1);
-  border: 0;
+  border: 1px solid hsla(230, 20%, 85%, 1);
   font: inherit;
   color: inherit;
+  margin-bottom: 1em;
+}
+
+button {
+  background-color: hsla(230, 20%, 95%, 1);
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+label {
+  margin-bottom: 0.5em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
