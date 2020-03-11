@@ -1,0 +1,9 @@
+{
+  "name": "react-apparel-shop",
+  "version": "1.0.0",
+  "scripts": {
+    "client:build": "cd client && npm install && npm run build && cd ..",
+    "postinstall": "npm run client:build && cd server && npm install && cd ..",
+    "start": "node ./server/server"
+  }
+}
