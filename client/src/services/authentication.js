@@ -47,4 +47,24 @@ const loadUserInformation = () =>
       .catch(reject);
   });
 
-export { signIn, signUp, signOut, loadUserInformation };
+const editUserInformation = async data => {
+  // console.log(data);
+  const form = new FormData();
+  form.append('name', data.name);
+  form.append('email', data.email);
+  form.append('picture', data.picture);
+  const result = await instance.patch('/user-information', form);
+  const user = result.data.user;
+  return user;
+};
+
+// =>
+//   new Promise((resolve, reject) => {
+//       .then(result => {
+//         const user = result.data.user;
+//         resolve(user);
+//       })
+//       .catch(reject);
+//   });
+
+export { signIn, signUp, signOut, loadUserInformation, editUserInformation };

@@ -61,4 +61,26 @@ router.get('/user-information', (req, res, next) => {
   res.json({ user: req.user || null });
 });
 
+const uploader = require('./../multer-configure.js');
+
+router.patch('/user-information', uploader.single('picture'), async (req, res, next) => {
+  const { email, name } = req.body;
+  let picture;
+  if (req.file) picture = req.file.url;
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        name,
+        email,
+        ...(picture ? { picture } : {})
+      },
+      { new: true }
+    );
+    res.json({ user });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

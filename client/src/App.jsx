@@ -9,6 +9,8 @@ import ProductListView from './views/ProductList';
 import CheckoutView from './views/Checkout';
 import AuthenticationSignUpView from './views/Authentication/SignUp';
 import AuthenticationSignInView from './views/Authentication/SignIn';
+import PrivateView from './views/Private';
+import PrivateEditView from './views/PrivateEdit';
 import ErrorView from './views/Error';
 
 import { loadUserInformation } from './services/authentication';
@@ -78,6 +80,24 @@ class App extends Component {
                     updateUserInformation={this.updateUserInformation}
                   />
                 )}
+              />
+              <ProtectedRoute
+                authorized={this.state.user}
+                redirect="/sign-in"
+                path="/private/edit"
+                render={props => (
+                  <PrivateEditView
+                    updateUserInformation={this.updateUserInformation}
+                    user={this.state.user}
+                    {...props}
+                  />
+                )}
+              />
+              <ProtectedRoute
+                authorized={this.state.user}
+                redirect="/sign-in"
+                path="/private"
+                render={props => <PrivateView user={this.state.user} {...props} />}
               />
               <Route path="/error" component={ErrorView} />
               <Redirect to="/error" />

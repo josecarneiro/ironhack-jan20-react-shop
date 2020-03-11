@@ -2,8 +2,11 @@
   display: flex;
   a,
   button {
+    display: flex;
+    align-items: center;
     padding: 1em 0;
     margin-right: 1em;
+    margin-bottom: 0;
     &:last-child {
       margin-right: 0;
     }
@@ -12,4 +15,15 @@
     border: 0;
     background-color: transparent;
   }
+}
+
+.profile__picture {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5em;
 }

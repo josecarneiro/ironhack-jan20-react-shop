@@ -19,7 +19,12 @@ const NavBar = props => {
       <Link to="/">Shop</Link>
       {(props.user && (
         <Fragment>
-          <Link to="/">{props.user.name}'s Profile</Link>
+          <Link to="/private">
+            <div className="profile__picture">
+              <img src={props.user.picture} alt={props.user.name} />
+            </div>
+            {props.user.name}'s Profile
+          </Link>
           <Link to="/checkout">Checkout</Link>
           <button onClick={handleSignOut}>Sign Out</button>
         </Fragment>
