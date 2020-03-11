@@ -4,6 +4,7 @@ const currencyMap = {
   GBP: '£'
 };
 
-const formatPrice = ({ value, currency }) => `${(value / 100).toFixed(2)}${currencyMap[currency]}`;
+const formatPrice = ({ amount, currency }) =>
+  `${(amount / 100).toFixed(2)}${currencyMap[currency]}`;
 
 export default formatPrice;

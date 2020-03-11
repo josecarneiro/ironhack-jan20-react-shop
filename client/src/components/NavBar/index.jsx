@@ -17,10 +17,10 @@ const NavBar = props => {
   return (
     <nav className="nav-bar">
       <Link to="/">Shop</Link>
-      <Link to="/checkout">Checkout</Link>
       {(props.user && (
         <Fragment>
           <Link to="/">{props.user.name}'s Profile</Link>
+          <Link to="/checkout">Checkout</Link>
           <button onClick={handleSignOut}>Sign Out</button>
         </Fragment>
       )) || (

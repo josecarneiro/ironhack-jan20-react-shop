@@ -33,7 +33,7 @@ class ProductListView extends Component {
       <div>
         <div className="product__list">
           {this.state.products.map(product => (
-            <ProductItem key={product.id} {...product} />
+            <ProductItem key={product._id} {...product} />
           ))}
         </div>
       </div>

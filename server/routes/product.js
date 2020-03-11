@@ -4,18 +4,25 @@ const express = require('express');
 const { Router } = express;
 
 const router = new Router();
+const Product = require('./../models/product');
 
-const database = require('./../database');
-
-router.get('/list', (req, res, next) => {
-  const products = database.products;
-  res.json({ products });
+router.get('/list', async (req, res, next) => {
+  try {
+    const products = await Product.find();
+    res.json({ products });
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   const id = req.params.id;
-  const product = database.products.find(item => item.id === id);
-  res.json({ product });
+  try {
+    const product = await Product.findById(id);
+    res.json({ product });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

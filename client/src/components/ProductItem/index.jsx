@@ -7,7 +7,7 @@ import './style.scss';
 
 const ProductItem = props => {
   return (
-    <Link to={`/product/${props.id}`} className="product__item">
+    <Link to={`/product/${props._id}`} className="product__item">
       <figure className="product__image">
         <img src={props.image} alt={props.name} />
       </figure>
