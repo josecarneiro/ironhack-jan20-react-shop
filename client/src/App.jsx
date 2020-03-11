@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import ProductSingleView from './views/ProductSingle';
 import ProductListView from './views/ProductList';
 import CheckoutView from './views/Checkout';
 import AuthenticationSignUpView from './views/Authentication/SignUp';
 import AuthenticationSignInView from './views/Authentication/SignIn';
+import ErrorView from './views/Error';
 
 import { loadUserInformation } from './services/authentication';
 
@@ -49,9 +51,16 @@ class App extends Component {
             <Switch>
               <Route path="/" exact component={ProductListView} />
               <Route path="/product/:id" component={ProductSingleView} />
-              <Route path="/checkout" component={CheckoutView} />
-              <Route
+              <ProtectedRoute
+                path="/checkout"
+                component={CheckoutView}
+                authorized={this.state.user}
+                redirect={'/sign-in'}
+              />
+              <ProtectedRoute
                 path="/sign-up"
+                authorized={!this.state.user}
+                redirect={'/'}
                 render={props => (
                   <AuthenticationSignUpView
                     {...props}
@@ -59,8 +68,10 @@ class App extends Component {
                   />
                 )}
               />
-              <Route
+              <ProtectedRoute
                 path="/sign-in"
+                authorized={!this.state.user}
+                redirect={'/'}
                 render={props => (
                   <AuthenticationSignInView
                     {...props}
@@ -68,6 +79,8 @@ class App extends Component {
                   />
                 )}
               />
+              <Route path="/error" component={ErrorView} />
+              <Redirect to="/error" />
             </Switch>
           </BrowserRouter>
         )) || <span>Loading...</span>}
