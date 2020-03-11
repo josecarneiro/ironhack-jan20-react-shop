@@ -12,6 +12,9 @@ const schema = new mongoose.Schema({
     required: true,
     lowercase: true,
     trim: true
+  },
+  passwordHash: {
+    type: String
   }
 });
 
