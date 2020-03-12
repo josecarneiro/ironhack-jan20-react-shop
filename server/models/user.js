@@ -18,6 +18,9 @@ const schema = new mongoose.Schema({
   },
   picture: {
     type: String
+  },
+  stripeCustomerId: {
+    type: String
   }
 });
 

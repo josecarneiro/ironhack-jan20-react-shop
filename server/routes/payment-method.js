@@ -5,8 +5,7 @@ const { Router } = express;
 
 const router = new Router();
 
-const stripe = require('stripe');
-const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = require('./../stripe-configure');
 
 const PaymentMethod = require('./../models/payment-method');
 
@@ -22,26 +21,20 @@ router.get('/list', async (req, res, next) => {
 router.post('/create', async (req, res, next) => {
   const { token } = req.body;
   try {
-    const customer = await stripeInstance.customers.create({
-      payment_method: token
+    const method = await stripe.paymentMethods.attach(token, {
+      customer: req.user.stripeCustomerId
     });
-    // console.log(customer);
-    const customerId = customer.id;
     const paymentMethod = await PaymentMethod.create({
-      token: customerId,
-      owner: req.user._id
+      token,
+      owner: req.user._id,
+      brand: method.card.brand,
+      lastFourDigits: method.card.last4,
+      country: method.card.card,
+      expirationDate: {
+        year: method.card.exp_year,
+        month: method.card.exp_month
+      }
     });
-
-    // console.log(paymentMethod);
-
-    // const charge = await stripeInstance.charges.create({
-    //   amount: 5089,
-    //   currency: 'eur',
-    //   customer: paymentMethod.token
-    //   // source: 'src_18eYalAHEMiOZZp1l9ZTjSU0'
-    // });
-
-    // console.log(charge);
     res.json({});
   } catch (error) {
     console.log(error);

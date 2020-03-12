@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom';
 
 import formatPrice from './../../utilities/format-price';
 
+import classnames from 'classnames';
+
 import './style.scss';
 
 const ProductItem = props => {
   return (
-    <Link to={`/product/${props._id}`} className="product__item">
+    <Link
+      to={`/product/${props._id}`}
+      className={classnames('product__item', { 'product__item--disabled': !props.unitsLeft })}
+    >
       <figure className="product__image">
         <img src={props.image} alt={props.name} />
       </figure>

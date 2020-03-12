@@ -5,6 +5,13 @@
   margin-bottom: 1em;
 }
 
+.product__item--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(1);
+  user-select: none;
+}
+
 .product__image {
   margin-bottom: 1em;
   background: #f7f7f7;

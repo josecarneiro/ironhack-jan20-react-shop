@@ -4,6 +4,7 @@ import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js
 
 import { create as paymentMethodCreate } from '../../services/payment-method';
 
+import './style.scss';
 const STRIPE_PUBLIC_KEY = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 class PaymentMethodView extends Component {
@@ -36,6 +37,18 @@ class PaymentMethodView extends Component {
   }
 
   render() {
+    const STRIPE_ELEMENT_OPTIONS = {
+      style: {
+        base: {
+          fontSize: '16px',
+          color: '#424770',
+          fontFamily: 'sans-serif'
+        },
+        invalid: {
+          color: '#c23d4b'
+        }
+      }
+    };
     return (
       <div>
         <h3>Add new Payment Method</h3>
@@ -44,7 +57,7 @@ class PaymentMethodView extends Component {
             {({ stripe, elements }) => (
               <form onSubmit={event => this.handleFormSubmission(event, stripe, elements)}>
                 {/* <label htmlFor="name">Name</label> */}
-                <CardElement />
+                <CardElement options={STRIPE_ELEMENT_OPTIONS} />
                 <button>Add Payment Method</button>
               </form>
             )}

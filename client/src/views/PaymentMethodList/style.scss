@@ -1,0 +1,16 @@
+.payment__method--card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  padding: 1em;
+  box-shadow: 0.25em 0 1em -0.5em hsla(230, 20%, 80%, 1);
+  img {
+    width: 2.5em;
+    margin-right: 1em;
+  }
+  span {
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+}

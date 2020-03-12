@@ -49,7 +49,7 @@ class ProductSingleView extends Component {
                 suscipit possimus nesciunt hic minus inventore distinctio iure!
               </p>
               <span>{product.colors} different colors</span>
-              <button onClick={this.handleCartAddition}>
+              <button onClick={this.handleCartAddition} disabled={!product.unitsLeft}>
                 Add to Cart | {formatPrice(product.price)}
               </button>
             </div>

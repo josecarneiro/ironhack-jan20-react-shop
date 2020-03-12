@@ -13,6 +13,9 @@ const schema = new mongoose.Schema({
       ref: 'Product'
     }
   ],
+  paymentIntent: {
+    type: String
+  },
   charged: {
     type: Boolean
   },
