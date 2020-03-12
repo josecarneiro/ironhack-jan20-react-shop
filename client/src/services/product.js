@@ -1,5 +1,4 @@
 import axios from 'axios';
-import ProductItem from '../components/ProductItem';
 
 const instance = axios.create({
   baseURL: '/api'

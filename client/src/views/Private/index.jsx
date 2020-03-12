@@ -14,6 +14,7 @@ class PrivateView extends Component {
           <span>{user.email}</span>
         </div>
         <Link to="/private/edit">Edit Profile</Link>
+        <Link to="/payment-method/list">View Payment Methods</Link>
       </div>
     );
   }

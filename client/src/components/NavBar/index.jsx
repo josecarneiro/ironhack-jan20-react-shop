@@ -25,7 +25,9 @@ const NavBar = props => {
             </div>
             {props.user.name}'s Profile
           </Link>
-          <Link to="/checkout">Checkout</Link>
+          <Link to="/checkout">
+            Shopping Cart <small>({props.cart.length})</small>
+          </Link>
           <button onClick={handleSignOut}>Sign Out</button>
         </Fragment>
       )) || (

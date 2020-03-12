@@ -10,6 +10,7 @@ class ProductSingleView extends Component {
     this.state = {
       product: null
     };
+    this.handleCartAddition = this.handleCartAddition.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +26,10 @@ class ProductSingleView extends Component {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  handleCartAddition() {
+    this.props.updateCart(this.state.product);
   }
 
   render() {
@@ -44,7 +49,9 @@ class ProductSingleView extends Component {
                 suscipit possimus nesciunt hic minus inventore distinctio iure!
               </p>
               <span>{product.colors} different colors</span>
-              <button>Add to Cart | {formatPrice(product.price)}</button>
+              <button onClick={this.handleCartAddition}>
+                Add to Cart | {formatPrice(product.price)}
+              </button>
             </div>
           </Fragment>
         )) ||

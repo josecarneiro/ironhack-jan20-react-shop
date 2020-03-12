@@ -13,6 +13,8 @@ const basicAuthenticationDeserializer = require('./middleware/basic-authenticati
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
 const authenticationRouter = require('./routes/authentication');
 const productRouter = require('./routes/product');
+const paymentMethodRouter = require('./routes/payment-method');
+const purchaseRouter = require('./routes/purchase');
 
 const app = express();
 
@@ -43,6 +45,8 @@ app.use(bindUserToViewLocals);
 
 app.use('/api/authentication', authenticationRouter);
 app.use('/api/product', productRouter);
+app.use('/api/payment-method', paymentMethodRouter);
+app.use('/api/purchase', purchaseRouter);
 
 app.get('*', (req, res, next) => {
   res.sendFile(join(__dirname, './../client/build/index.html'));

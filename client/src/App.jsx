@@ -11,6 +11,8 @@ import AuthenticationSignUpView from './views/Authentication/SignUp';
 import AuthenticationSignInView from './views/Authentication/SignIn';
 import PrivateView from './views/Private';
 import PrivateEditView from './views/PrivateEdit';
+import PaymentMethodListView from './views/PaymentMethodList';
+import PaymentMethodCreateView from './views/PaymentMethodCreate';
 import ErrorView from './views/Error';
 
 import { loadUserInformation } from './services/authentication';
@@ -20,9 +22,11 @@ class App extends Component {
     super();
     this.state = {
       loaded: false,
-      user: null
+      user: null,
+      cart: []
     };
     this.updateUserInformation = this.updateUserInformation.bind(this);
+    this.updateCart = this.updateCart.bind(this);
   }
 
   componentDidMount() {
@@ -44,18 +48,31 @@ class App extends Component {
     });
   }
 
+  updateCart(item) {
+    this.setState(previousState => ({
+      cart: [...previousState.cart, item]
+    }));
+  }
+
   render() {
     return (
       <div className="App">
         {(this.state.loaded && (
           <BrowserRouter>
-            <NavBar user={this.state.user} updateUserInformation={this.updateUserInformation} />
+            <NavBar
+              user={this.state.user}
+              cart={this.state.cart}
+              updateUserInformation={this.updateUserInformation}
+            />
             <Switch>
               <Route path="/" exact component={ProductListView} />
-              <Route path="/product/:id" component={ProductSingleView} />
+              <Route
+                path="/product/:id"
+                render={props => <ProductSingleView updateCart={this.updateCart} {...props} />}
+              />
               <ProtectedRoute
                 path="/checkout"
-                component={CheckoutView}
+                render={props => <CheckoutView cart={this.state.cart} {...props} />}
                 authorized={this.state.user}
                 redirect={'/sign-in'}
               />
@@ -98,6 +115,18 @@ class App extends Component {
                 redirect="/sign-in"
                 path="/private"
                 render={props => <PrivateView user={this.state.user} {...props} />}
+              />
+              <ProtectedRoute
+                authorized={this.state.user}
+                redirect="/sign-in"
+                path="/payment-method/list"
+                render={props => <PaymentMethodListView user={this.state.user} {...props} />}
+              />
+              <ProtectedRoute
+                authorized={this.state.user}
+                redirect="/sign-in"
+                path="/payment-method/create"
+                render={props => <PaymentMethodCreateView user={this.state.user} {...props} />}
               />
               <Route path="/error" component={ErrorView} />
               <Redirect to="/error" />
